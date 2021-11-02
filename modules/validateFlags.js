@@ -1,3 +1,3 @@
-module.exports.validateFlags = (str) => {
-  return str.split(" ").length === Array.from(new Set(str.split(" "))).length;
+module.exports.validateFlags = (args) => {
+  return args.length === Array.from(new Set(args)).length;
 };
