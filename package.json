@@ -1,0 +1,11 @@
+{
+  "name": "rss-node",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node my_caesar_cli.js",
+    "dev": "nodemon my_caesar_cli.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
