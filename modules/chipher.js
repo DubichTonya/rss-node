@@ -2,7 +2,7 @@ module.exports = {
 
   alphabet: ['A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z'],
 
-  caesar(text, shift = 1, mode = 1) {
+  caesar(text='',mode = 1, shift = 1) {
     if (mode) {
       text = text.split("").map((item) => {
         return this.alphabet.indexOf(item) == -1
@@ -34,9 +34,8 @@ module.exports = {
     return text.join("");
   },
 
-  rot8(text, mode = 1) {
-    const shift = 8;
-    return this.caesar(text, shift, mode);
+  rot8(text, mode = 1, shift = 8) {
+    return this.caesar(text, mode, shift)
   },
 
   reverseAlphabet() {
