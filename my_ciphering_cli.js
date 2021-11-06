@@ -11,10 +11,11 @@ const {
   InputError,
   OutputError,
 } = require("./modules/errors");
+const ReadStream = require('./streams/ReadableStream');
 
 const data = helper.getData(process.argv);
 const inputStream = data.has("-i")
-  ? fs.createReadStream(path.resolve(__dirname, data.get("-i")), "utf8")
+  ? new ReadStream(path.resolve(__dirname, data.get("-i")), "utf8")
   : process.stdin;
 const outputStream = data.has("-o")
   ? new WritableStream(path.resolve(__dirname, data.get("-o")))
@@ -46,4 +47,8 @@ outputStream.on("error", (err) => {
   helper.error(`${err.name}: ${err.message}`);
 });
 
-pipeline(inputStream, transformStream, outputStream);
+pipeline(
+    inputStream,
+    transformStream,
+    outputStream
+)
