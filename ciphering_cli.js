@@ -1,7 +1,5 @@
-const fs = require("fs");
 const helper = require("./modules/helper");
 const path = require("path");
-const TransformStream = require("./streams/TransformStream");
 const WritableStream = require("./streams/WritableStream");
 const stream = require("stream");
 const util = require("util");
@@ -10,6 +8,7 @@ const {
   DuplicateFlagError,
 } = require("./modules/errors");
 const ReadStream = require('./streams/ReadableStream');
+const transformFunction = require('./streams/TransformStream');
 
 const data = helper.getData(process.argv);
 const inputStream = data.has("-i")
@@ -18,7 +17,7 @@ const inputStream = data.has("-i")
 const outputStream = data.has("-o")
   ? new WritableStream(path.resolve(__dirname, data.get("-o")))
   : process.stdout;
-const transformStream = new TransformStream(data.get("-c"));
+const transformStream = transformFunction(data.get("-c"));
 const pipeline = util.promisify(stream.pipeline);
 
 try {
@@ -35,7 +34,7 @@ try {
 
 pipeline(
     inputStream,
-    transformStream,
+    ...transformStream,
     outputStream
 ).catch(err => {
   helper.error(`${err.name}: ${err.message}`);

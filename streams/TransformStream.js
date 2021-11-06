@@ -1,43 +1,66 @@
 const stream = require("stream");
 const cipher = require("../modules/cipher");
 
-class TransformStream extends stream.Transform {
-  constructor(configArray) {
+class TransformStreamCaesar extends stream.Transform {
+  constructor(mode) {
     super();
-    this.configArray = configArray;
+    this.mode = mode;
   }
 
   _transform(chunk, encoding, callback) {
-    this.push(transformFunction(this.configArray, chunk));
+    this.push(cipher.caesar(chunk.toString(), this.mode));
     callback();
   }
 }
 
-function transformFunction(configArray, chunk) {
-  chunk = chunk.toString();
+class TransformStreamROT8 extends stream.Transform {
+  constructor(mode) {
+    super();
+    this.mode = mode;
+  }
+
+  _transform(chunk, encoding, callback) {
+    this.push(cipher.rot8(chunk.toString(), this.mode));
+    callback();
+  }
+}
+
+class TransformStreamAtbash extends stream.Transform {
+  constructor(mode) {
+    super();
+    this.mode = mode;
+  }
+
+  _transform(chunk, encoding, callback) {
+    this.push(cipher.atbash(chunk.toString(), this.mode));
+    callback();
+  }
+}
+
+function transformFunction(configArray) {
+  const transformArray = []
   configArray.forEach((item) => {
     switch (item) {
       case "C0":
-        chunk = cipher.caesar(chunk, 0);
+        transformArray.push(new TransformStreamCaesar(0))
         break;
       case "C1":
-        chunk = cipher.caesar(chunk);
+        transformArray.push(new TransformStreamCaesar(1))
         break;
       case "R0":
-        chunk = cipher.rot8(chunk, 0);
+        transformArray.push(new TransformStreamROT8(0))
         break;
       case "R1":
-        chunk = cipher.rot8(chunk, 1);
+        transformArray.push(new TransformStreamROT8(1))
         break;
       case "A":
-        chunk = cipher.atbash(chunk);
+        transformArray.push(new TransformStreamAtbash())
         break;
       default:
-        chunk = chunk;
         break;
     }
   });
-  return chunk;
+  return transformArray;
 }
 
-module.exports = TransformStream;
+module.exports = transformFunction;
