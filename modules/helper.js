@@ -9,6 +9,21 @@ module.exports = {
     const data = new Map();
 
     arrArgs.forEach((item, index) => {
+      switch (item){
+        case '--config':
+          item = '-c';
+          break;
+        case '--input':
+          item = '-i';
+          break;
+        case '--output':
+          item = '-o';
+          break;
+        default:
+          item = item;
+          break;
+      }
+
       if (
         item.match(regexp) &&
         arrArgs[index + 1] &&

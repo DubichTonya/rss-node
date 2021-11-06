@@ -8,8 +8,6 @@ const util = require("util");
 const {
   ConfigError,
   DuplicateFlagError,
-  InputError,
-  OutputError,
 } = require("./modules/errors");
 const ReadStream = require('./streams/ReadableStream');
 
@@ -35,20 +33,10 @@ try {
   helper.error(`${err.name}: ${err.message}`);
 }
 
-inputStream.on("error", () => {
-  try {
-    throw new InputError("You have problem in input file");
-  } catch (err) {
-    helper.error(`${err.name}: ${err.message}`);
-  }
-});
-
-outputStream.on("error", (err) => {
-  helper.error(`${err.name}: ${err.message}`);
-});
-
 pipeline(
     inputStream,
     transformStream,
     outputStream
-)
+).catch(err => {
+  helper.error(`${err.name}: ${err.message}`);
+})
