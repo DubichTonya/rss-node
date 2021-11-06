@@ -11,11 +11,11 @@
 3. Enter in the console `npm i`.
 4. Now you can decoded and encoded text in console.
 
-##How decoded and encoded text:
+## How decoded and encoded text:
 You need enter command in console.
 > All commands start from `node my_ciphering_cli` after that you will need to enter the parameters you want. You can get acquainted with the parameters below.
 > 
-> ###Important:
+> ### Important:
 > * You should definitely register the `Config` parameter. And it must correspond to the pattern that is prescribed in the `Options` section.</br></br>
 > * If you want to use your own input file, you need to add it to the root of the project.</br></br>
 > * If you do not specify the input and output configuration in the parameters, then you will be able to enter text into the console. And you can see the result after pressing enter.</br> To finish typing, press `Ctrl + C`.</br></br>
