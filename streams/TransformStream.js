@@ -1,5 +1,5 @@
 const stream = require("stream");
-const chipher = require("../modules/chipher");
+const cipher = require("../modules/cipher");
 
 class TransformStream extends stream.Transform {
   constructor(configArray) {
@@ -18,19 +18,19 @@ function transformFunction(configArray, chunk) {
   configArray.forEach((item) => {
     switch (item) {
       case "C0":
-        chunk = chipher.caesar(chunk, 0);
+        chunk = cipher.caesar(chunk, 0);
         break;
       case "C1":
-        chunk = chipher.caesar(chunk);
+        chunk = cipher.caesar(chunk);
         break;
       case "R0":
-        chunk = chipher.rot8(chunk, 0);
+        chunk = cipher.rot8(chunk, 0);
         break;
       case "R1":
-        chunk = chipher.rot8(chunk, 1);
+        chunk = cipher.rot8(chunk, 1);
         break;
       case "A":
-        chunk = chipher.atbash(chunk);
+        chunk = cipher.atbash(chunk);
         break;
       default:
         chunk = chunk;
