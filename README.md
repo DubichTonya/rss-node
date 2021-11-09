@@ -18,8 +18,7 @@ You need enter command in console.
 > ### Important:
 > * You should definitely register the `Config` parameter. And it must correspond to the pattern that is prescribed in the `Options` section.</br></br>
 > * If you want to use your own input file, you need to add it to the root of the project.</br></br>
-> * If you do not specify the input and output configuration in the parameters, then you will be able to enter text into the console. And you can see the result after pressing enter.</br> To finish typing, press `Ctrl + C`.</br></br>
-> * If you do not specify only the input configuration in the parameters, you will be able to enter text into the console. After you finish typing, press `Ctrl + C `. The result of the program will be in the output file.</br></br>
+> * If you do not specify the input configuration, then you will be able to enter text into the console. And you can see the result after pressing enter.</br> To finish typing, press `Ctrl + C`.</br></br>
 > * If you do not specify the output configuration in the options, the result will be output to the console.</br>
 
 ## Options:
