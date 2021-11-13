@@ -8,7 +8,7 @@ class TransformStreamCaesar extends stream.Transform {
   }
 
   _transform(chunk, encoding, callback) {
-    this.push(cipher.caesar(chunk.toString(), this.mode));
+    this.push(cipher.caesar(chunk.toString().trim(), this.mode));
     callback();
   }
 }
@@ -20,7 +20,7 @@ class TransformStreamROT8 extends stream.Transform {
   }
 
   _transform(chunk, encoding, callback) {
-    this.push(cipher.rot8(chunk.toString(), this.mode));
+    this.push(cipher.rot8(chunk.toString().trim(), this.mode));
     callback();
   }
 }
@@ -32,7 +32,7 @@ class TransformStreamAtbash extends stream.Transform {
   }
 
   _transform(chunk, encoding, callback) {
-    this.push(cipher.atbash(chunk.toString(), this.mode));
+    this.push(cipher.atbash(chunk.toString().trim(), this.mode));
     callback();
   }
 }
