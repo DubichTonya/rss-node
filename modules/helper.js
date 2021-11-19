@@ -50,8 +50,8 @@ module.exports = {
     return !count;
   },
 
-  validateFlags: (args) => {
-    const flags = [...args].filter((item) => item.match(/^\-([c|i|o])$/));
-    return flags.length === Array.from(new Set(flags)).length;
-  },
+  validateFlags: function (args) {
+    const flags = [...args].filter((item) => item.match(/^\-(c|i|o|\-input|\-output|\-config)$/));
+    return flags.length === this.getData(args).size;
+  }
 };
