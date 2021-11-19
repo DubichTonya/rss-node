@@ -1,10 +1,5 @@
 module.exports = {
-  error: (text) => {
-    process.stderr.write(text);
-    process.exit(9);
-  },
-
-  getData: (arrArgs) => {
+  getData: function (arrArgs) {
     const regexp = /^\-[c|i|o]$/;
     const data = new Map();
 

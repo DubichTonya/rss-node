@@ -3,25 +3,16 @@ const path = require("path");
 const WritableStream = require("./streams/WritableStream");
 const stream = require("stream");
 const util = require("util");
-const {
-  ConfigError,
-  DuplicateFlagError,
-} = require("./modules/errors");
 const ReadStream = require('./streams/ReadableStream');
 const transformFunction = require('./streams/TransformStream');
-
-const data = helper.getData(process.argv);
+const {error} = require('./modules/error');
+const {checkValidateConfig, checkValidateFlags, data} = require('./modules/validate');
 
 try {
-  if (!data.get("-c") || !helper.validateConfig(data.get("-c"))) {
-    throw new ConfigError("You have problem with config");
-  }
-
-  if (!helper.validateFlags(process.argv.slice(2))) {
-    throw new DuplicateFlagError("Flags should not be repeated");
-  }
+  checkValidateConfig(data);
+  checkValidateFlags(process.argv.slice(2));
 } catch (err) {
-  helper.error(`${err.name}: ${err.message}`);
+  error(`${err.name}: ${err.message}`);
 }
 
 const inputStream = data.has("-i")
@@ -38,5 +29,5 @@ pipeline(
     ...transformStream,
     outputStream
 ).catch(err => {
-  helper.error(`${err.name}: ${err.message}`);
+  error(`${err.name}: ${err.message}`);
 })

@@ -2,6 +2,7 @@ const stream = require("stream");
 const fs = require("fs");
 const { OutputError } = require("../modules/errors");
 const helper = require("../modules/helper");
+const {error} = require('../modules/error');
 
 class WritableStream extends stream.Writable {
   constructor(file) {
@@ -15,7 +16,7 @@ class WritableStream extends stream.Writable {
       callback();
     } catch (err) {
       err = new OutputError("You have problem in output file");
-      helper.error(`${err.name}: ${err.message}`);
+      error(`${err.name}: ${err.message}`);
     }
   }
 }

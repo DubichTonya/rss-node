@@ -1,13 +1,8 @@
 class CustomError extends Error {
   constructor(message, status = "status unknown") {
     super(message);
-    this.name = "Custom Error";
+    this.name = "CustomError";
     this.status = status;
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, CustomError);
-    } else {
-      this.stack = new Error().stack;
-    }
   }
 }
 
@@ -44,4 +39,5 @@ module.exports = {
   OutputError,
   InputError,
   DuplicateFlagError,
+  CustomError
 };
