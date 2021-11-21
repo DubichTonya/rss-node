@@ -1,0 +1,11 @@
+{
+  "name": "rss-node",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ciphering_cli.js",
+    "dev": "nodemon ciphering_cli.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
