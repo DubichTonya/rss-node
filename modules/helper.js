@@ -1,10 +1,5 @@
 module.exports = {
-  error: (text) => {
-    process.stderr.write(text);
-    process.exit(9);
-  },
-
-  getData: (arrArgs) => {
+  getData: function (arrArgs) {
     const regexp = /^\-[c|i|o]$/;
     const data = new Map();
 
@@ -50,8 +45,8 @@ module.exports = {
     return !count;
   },
 
-  validateFlags: (args) => {
-    const flags = [...args].filter((item) => item.match(/^\-([c|i|o])$/));
-    return flags.length === Array.from(new Set(flags)).length;
-  },
+  validateFlags: function (args) {
+    const flags = [...args].filter((item) => item.match(/^\-(c|i|o|\-input|\-output|\-config)$/));
+    return flags.length === this.getData(args).size;
+  }
 };
